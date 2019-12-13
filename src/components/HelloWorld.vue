@@ -1,5 +1,21 @@
 <template>
   <div class="hello">
+    <p>{{ type }}</p>
+    <!-- 数组去重 -->
+    <p>选择：{{ selectVal }}</p>
+    <Dropdown @on-click.native="select()">
+      <a href="javascript:void(0)">
+          下拉菜单
+          <Icon type="ios-arrow-down"></Icon>
+      </a>
+      <DropdownMenu slot="list">
+          <DropdownItem name="1">驴打滚</DropdownItem>
+          <DropdownItem name="2">炸酱面</DropdownItem>
+          <DropdownItem name="3">豆汁儿</DropdownItem>
+          <DropdownItem name="4">冰糖葫芦</DropdownItem>
+          <DropdownItem name="5">北京烤鸭</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -34,7 +50,73 @@
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    msg: String,
+    type: String
+  },
+  data() {
+    return {
+      list: [1, 3, 5, 2, 4, 6, 567, 123, 45, 24],
+      objList: [
+        {
+          name: 'a',
+          code: 123
+        },
+        {
+          name: 'b',
+          code: 23
+        },
+        {
+          name: 'c',
+          code: 3
+        },
+        {
+          name: 'd',
+          code: 43
+        }
+      ],
+      obj: {
+        a: '23',
+        b: '34',
+        c: '45',
+        d: '56',
+        e: '67'
+      },
+      selectVal: ''
+    }
+  },
+  created() {
+    // const a = this.quickSort(this.list)
+    // console.log(a)
+    this.traverseObj()
+    console.log(this.type, '----type')
+  },
+  methods: {
+    select(name) {
+      this.selectVal = name
+    },
+    quickSort(arr) {
+      const centerIndex = Math.floor(arr.length / 2) // 获取中间项索引
+      const centerValue = arr[centerIndex] // 获取中间项值
+      const left = []
+      const right = []
+      arr.forEach(item => {
+        if (item < centerValue) {
+          left.push(item)
+        } else if (item > centerValue) {
+          right.push(item)
+        }
+      })
+      return left.concat(centerValue, right)
+      // return this.quickSort(left).concat([centerValue], this.quickSort(right))
+    },
+    traverseObj() {
+      // const obj = Object.getOwnPropertyNames(this.obj)
+      // for (let item in this.obj) {
+      //   console.log(item)
+      // }
+      // console.log(obj)
+      
+    }
   }
 }
 </script>
