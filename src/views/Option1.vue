@@ -103,6 +103,16 @@ export default {
         }
       });
     }
+  },
+  mounted() {
+    var obj = new Object();
+    function Parent(a, b) {
+      (this.a = a), (this.b = b);
+    }
+    var child = new Parent("123", "456");
+    console.log(child, "----child");
+    console.log(Parent.prototype, "----Parent");
+    console.log(obj, "-----obj");
   }
 };
 </script>
